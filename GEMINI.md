@@ -1,6 +1,10 @@
 # BiteBooks Project Overview
 
-BiteBooks is a full-stack web application designed for managing recipes. It is containerized with Docker and follows a decoupled architecture with a Django backend and a Vue.js frontend.
+BiteBooks is a full-stack web application designed to be your personal digital cookbook. It allows you to add, view, search, and organize your favorite recipes in one place. This project is designed as a beginner-friendly introduction to full-stack development.
+
+## Future Roadmap
+- [ ] Shopping list utility.
+- [ ] Meal planning functionality.
 
 ## Core Infrastructure
 - **Orchestration:** Docker Compose
