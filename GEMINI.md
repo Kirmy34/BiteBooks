@@ -1,41 +1,66 @@
-# BiteBooks Project Overview
+# BiteBooks: Context & Instructions
 
-BiteBooks is a full-stack web application designed to be your personal digital cookbook. It allows you to add, view, search, and organize your favorite recipes in one place. This project is designed as a beginner-friendly introduction to full-stack development.
+BiteBooks is a full-stack digital cookbook application designed for managing and organizing recipes. This file provides architectural context and development guidelines for the project.
 
-## Future Roadmap
-- [ ] Shopping list utility.
-- [ ] Meal planning functionality.
+## Project Overview
 
-## Core Infrastructure
-- **Orchestration:** Docker Compose
-- **Database:** PostgreSQL 16
-- **Storage:** Persistent volumes for database data
-- **Configuration:** Managed via a root `.env` file
+*   **Goal:** A personal cookbook web application (BiteBooks) for adding, viewing, searching, and organizing recipes.
+*   **Architecture:** Decoupled full-stack application with a Django REST API backend and a Vue.js frontend.
+*   **Backend Tech Stack:**
+    *   **Framework:** Django 6.0.2 with Django REST Framework (DRF).
+    *   **Authentication:** Simple JWT (JSON Web Tokens).
+    *   **Database:** PostgreSQL 16.
+    *   **Tools:** `python-dotenv` for environment management, `django-cors-headers` for frontend-backend communication.
+*   **Frontend Tech Stack:**
+    *   **Framework:** Vue 3 (Composition API).
+    *   **Build Tool:** Vite + TypeScript.
+    *   **Styling:** Tailwind CSS 4.x.
+*   **Environment:**
+    *   Development uses Docker/Devcontainers with a dedicated PostgreSQL service.
 
-## Project Structure
-- `/`: Root directory with infrastructure and orchestrator settings.
-- `backend/`: Django REST API project (see `backend/GEMINI.md` for details).
-- `frontend/`: Vue.js web application (see `frontend/GEMINI.md` for details).
-- `db_data/`: (Ignored) Local persistent database storage.
+## Directory Structure
 
-## Building and Running (Docker Only)
+*   `backend/`: Django project root.
+    *   `config/`: Main Django settings and URL configurations.
+    *   `manage.py`: Django management CLI.
+    *   `requirements.txt`: Python dependencies.
+*   `frontend/`: Vue.js project root.
+    *   `src/`: Application source code (Vue components, assets, etc.).
+    *   `package.json`: NPM dependencies and scripts.
+*   `.devcontainer/`: Configuration for the VS Code development container.
 
-To build and start all services (Frontend, Backend, and DB):
+## Building and Running
 
-```bash
-docker-compose up --build
-```
+### Development Setup (Docker)
 
-- **Frontend:** [http://localhost:5173](http://localhost:5173)
-- **Backend API:** [http://localhost:8000](http://localhost:8000)
-- **Django Admin:** [http://localhost:8000/admin/](http://localhost:8000/admin/)
+The project is pre-configured to run in a Devcontainer. Upon opening the workspace in VS Code (with Remote Containers extension):
+1.  The `db` service (Postgres) will start automatically.
+2.  Python and Node dependencies are installed via `postCreateCommand`.
 
-## Development Workflow
-- Global configuration and secrets should be managed in the root `.env`.
-- For domain-specific information, refer to the `GEMINI.md` files in the respective directories.
+### Manual Commands
 
-## High-Level TODOs
-- [ ] Create initial Django apps for project features.
-- [ ] Set up API endpoints in `backend/`.
-- [ ] Integrate frontend with backend API.
-- [ ] Implement user authentication flows.
+*   **Backend Server:**
+    ```bash
+    cd backend
+    python manage.py runserver
+    ```
+*   **Frontend Server:**
+    ```bash
+    cd frontend
+    npm run dev
+    ```
+*   **Database Migrations:**
+    ```bash
+    cd backend
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
+
+## Development Conventions
+
+*   **API Design:** Use Django REST Framework (DRF) with Class-Based Views (CBVs) or ViewSets.
+*   **Styling:** Prefer Tailwind CSS utility classes in Vue components. Use `style.css` only for global overrides.
+*   **Environment Variables:** All sensitive configurations (DB credentials, Secret Keys) should be stored in the root `.env` file and accessed via `os.environ` or `dotenv`.
+*   **Testing:**
+    *   Backend: Use Django's built-in test framework (`python manage.py test`).
+    *   Frontend: (Placeholder) Setup Vitest for unit testing components.

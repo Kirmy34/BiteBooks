@@ -1,0 +1,24 @@
+{
+  "name": "BiteBooks Dev",
+  "dockerComposeFile": "docker-compose.dev.yml",
+  "service": "dev",
+  "workspaceFolder": "/workspace",
+  
+  "forwardPorts": [8000, 5173],
+  "remoteUser": "vscode",
+  "onCreateCommand": {
+    "install-backend-deps": "pip install -r backend/requirements.txt",
+    "install-frontend-deps": "bash -lc 'cd frontend && npm install'"
+  },
+  "updateContentCommand": "bash -lc 'cd backend && python manage.py migrate'",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "Vue.volar"
+      ]
+    }
+  }
+}

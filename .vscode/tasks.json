@@ -1,0 +1,45 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Django dev-server",
+      "detail": "Backend Django dev server",
+      "type": "shell",
+      "command": "[ -n \"$REMOTE_CONTAINERS\" ] && python manage.py runserver 0.0.0.0:8000 || true",
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "isBackground": true,
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated",
+        "showReuseMessage": false        
+      },
+      "problemMatcher": [],
+      "runOptions": {
+        "instanceLimit": 1,
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "Start Vite dev-server",
+      "detail": "Frontend Vite dev server",
+      "type": "shell",
+      "command": "[ -n \"$REMOTE_CONTAINERS\" ] && npm run dev -- --host || true",
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "isBackground": true,
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated",
+        "showReuseMessage": false
+      },
+      "problemMatcher": [],
+      "runOptions": {
+        "instanceLimit": 1,
+        "runOn": "folderOpen"
+      }
+    },
+  ]
+}

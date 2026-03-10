@@ -1,0 +1,36 @@
+name: bitebooks
+services:
+  db:
+    image: postgres:16
+    container_name: bitebooks_db
+    env_file:
+      - ../.env
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  dev:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    container_name: bitebooks_dev
+    env_file:
+      - ../.env
+    environment:
+      DB_HOST: db
+      DB_NAME: app
+      DB_USER: app
+      DB_PASSWORD: app
+    volumes:
+      - ..:/workspace:cached
+    depends_on:
+      - db
+    command: sleep infinity
+
+volumes:
+  db_data:
