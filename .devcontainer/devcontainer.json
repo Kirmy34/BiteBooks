@@ -17,7 +17,8 @@
       "extensions": [
         "ms-python.python",
         "ms-python.vscode-pylance",
-        "Vue.volar"
+        "Vue.volar",
+        "bradlc.vscode-tailwindcss"
       ]
     }
   }
